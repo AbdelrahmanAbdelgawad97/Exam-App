@@ -15,10 +15,9 @@ export default function Exams() {
 
   const {id} = useParams();
   const contextId = useContext(ExamContext);
-  // id && contextId?.setExamID(id)
   const {data: topicsDiploma } = useAllDiplomaExams(id);
   const {data: exams } = useAllDiplomaTest(id);
-  console.log("exams ====> " , exams)
+  console.log("exams ====> " , exams?.exams)
   diplomaName = topicsDiploma?.title;
 
   function durationTitle(time:number, tit:string) {

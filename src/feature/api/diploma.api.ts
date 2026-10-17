@@ -74,7 +74,7 @@ export async function  getAllDiplomasAllExams(id: string|undefined) {
             Authorization: `Bearer ${theToken}`,
         }
     });
-    return response.data.payload;
+    return response.data;
 }
 
 // get all exam questions 

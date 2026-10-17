@@ -5,17 +5,14 @@ import ForwardArrow from "../../../shared/forwardArrow/ForwardArrow";
 import { diplomaName, theExamTitleExported } from "./Exams";
 import { useQueryGetAnswers } from "../../api/quireisDiploma/use-get-results";
 import { submissionId } from "../../api/diploma.api";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { cn } from "../../../shared/lib/utils";
 import { Button } from "#components/ui/button";
 import { useNavigate } from "react-router";
 import { ExamContext } from "../../../Context/UseContext";
-import Skeleton from 'react-loading-skeleton'
-import type { finalResults } from "../../user/types/iResults";
 
 export default function Results() {
   const {data} = useQueryGetAnswers(submissionId);
-  const [result, setResult] = useState<finalResults>()
   const contextId = useContext(ExamContext);
   const navigation = useNavigate();
   let wrongAnswer: number | undefined = data?.payload.submission.wrongAnswers && data?.payload.submission.wrongAnswers * 10; 
@@ -32,9 +29,6 @@ export default function Results() {
     navigation(`/exams/${contextId?.examID}/${data?.payload.submission.examId}`);
   }
 
-  useEffect(()=>{
-    setResult(data)
-  },[data])
 
   
   return (
@@ -103,7 +97,7 @@ export default function Results() {
             </div>
 
             <div className=" h-128.5 overflow-y-auto mx-5">
-              {result?.payload?.analytics?.map((ele , index)=>(
+              {data?.payload?.analytics?.map((ele , index)=>(
                 <div key={ele.questionId}>
                   <div className="space-y-2">
                     <p className="font-geist-mono mt-5 text-[20px] font-semibold leading-[100%] tracking-normal text-[#155DFC] align-middle" key={ele.questionId}>{`${index+1})`}{ele.questionText}</p>

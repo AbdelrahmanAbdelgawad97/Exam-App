@@ -1,3 +1,5 @@
+
+
 export interface Exam {
   id: string;
   title: string;
@@ -12,9 +14,12 @@ export interface Exam {
 }
 
 export interface ExamResponse {
-  status: boolean;
-  code: number;
-  payload: {
-    data: Exam[];
-  };
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  immutable: boolean;
+  createdAt: string;
+  updatedAt: string;
+  exams: Exam[];
 }
